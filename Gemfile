@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rhoconnect', '3.0.2'
+gem 'rhoconnect', '3.0.5'
 
 # Helps with some of the limitations of green threads, not needed in ruby 1.9.x
 gem 'SystemTimer', '~> 1.2.3', :platforms => :ruby_18
