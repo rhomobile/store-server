@@ -11,6 +11,11 @@ if ENV['DEBUG'] == 'yes'
  require 'debugger'
 end
 
+require 'rhoconnect/x_domain_session_wrapper'
+use XDomainSessionWrapper, \
+    :api_uri_regexp => /\A\/(api\/)?application/, \
+    :login_uri_regexp => /\A\/(api\/)?application\/clientlogin/
+
 # Try to load vendor-ed rhoconnect, otherwise load the gem
 begin
   require 'vendor/rhoconnect/lib/rhoconnect/server'
