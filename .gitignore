@@ -1,3 +1,5 @@
 .DS_Store
 apple_push_cert.pem
 coverage
+.idea
+*.rdb
