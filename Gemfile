@@ -29,7 +29,7 @@ platforms :jruby do
   gem 'warbler'
 end
 
-gem 'sqlite3', ">= 1.3.3", :platforms => [:ruby, :mswin, :mingw]
+#gem 'sqlite3', ">= 1.3.3", :platforms => [:ruby, :mswin, :mingw]
 
 group :development do
   gem 'rhomobile-debug', ">= 1.0.2"
