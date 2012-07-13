@@ -12,7 +12,7 @@ if ENV['DEBUG'] == 'yes'
 end
 
 require 'rhoconnect/server'
-require 'rhoconnect/console/server'
+require 'rhoconnect/web-console/server'
 require 'resque/server'
 
 # Rhoconnect server flags
