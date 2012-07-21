@@ -16,6 +16,7 @@ require 'rhoconnect/web-console/server'
 require 'resque/server'
 
 # Rhoconnect server flags
+Rhoconnect::Server.enable  :stats
 Rhoconnect::Server.disable :run
 Rhoconnect::Server.disable :clean_trace
 Rhoconnect::Server.enable  :raise_errors
