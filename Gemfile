@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rhoconnect', '3.3.1'
+gem 'rhoconnect', '3.3.5'
 
 # Helps with some of the limitations of green threads, not needed in ruby 1.9.x
 gem 'SystemTimer', '~> 1.2.3', :platforms => :ruby_18
@@ -29,14 +29,15 @@ platforms :jruby do
   gem 'warbler'
 end
 
-#gem 'sqlite3', ">= 1.3.3", :platforms => [:ruby, :mswin, :mingw]
+# uncomment the line below to use bulk sync: http://docs.rhomobile.com/rhoconnect/bulk-sync
+# gem 'sqlite3', ">= 1.3.3", :platforms => [:ruby, :mswin, :mingw]
 
 group :development do
   gem 'rhomobile-debug', ">= 1.0.2"
 end
 
 group :test do
+  gem 'rspec', '~> 2.10.0'
   gem 'rack-test', '>= 0.5.3', :require => "rack/test"
-  gem 'rspec', '~> 2.6.0'
   gem 'rhomobile-debug', ">= 1.0.2"
 end
