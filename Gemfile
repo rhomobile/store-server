@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rhoconnect', '3.3.5'
+gem 'rhoconnect', '3.3.6'
 
 # Helps with some of the limitations of green threads, not needed in ruby 1.9.x
 gem 'SystemTimer', '~> 1.2.3', :platforms => :ruby_18
@@ -8,7 +8,7 @@ gem 'win32-process', :platforms => [:mswin, :mingw]
 
 # use thin and eventmachine everywhere except JRuby
 platforms :ruby, :ruby_19, :mingw, :mingw_19 do
-  gem "eventmachine", "~> 1.0.0.beta"
+  gem "eventmachine", "~> 1.0.0"
   # using thin by default
   gem 'thin'
 end
