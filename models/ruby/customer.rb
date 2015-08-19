@@ -1,7 +1,7 @@
 require 'json'
 require 'rest_client'
 
-class Customer_s < SourceAdapter
+class Customer < Rhoconnect::Model::Base
 
   def initialize(source)
     @base = 'http://rhostore.herokuapp.com/customers'
@@ -12,13 +12,18 @@ class Customer_s < SourceAdapter
     parsed=JSON.parse(RestClient.get("#{@base}.json").body)
 
     @result={}
-    parsed.each { |item|@result[item["customer"]["id"].to_s]=item["customer"] } if parsed
+    parsed.each do |item|
+      if not params or (params and params["first"].downcase == item["customer"]["first"].downcase)
+        @result[item["customer"]["id"].to_s] = item["customer"]
+      end
+    end if parsed
     @result
   end
 
   def search(params)
     query(params)
   end
+
 
   def create(name_value_list)
     res = RestClient.post(@base,:customer => name_value_list)

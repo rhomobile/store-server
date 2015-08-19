@@ -1,7 +1,7 @@
 require 'json'
 require 'rest_client'
 
-class Product < SourceAdapter
+class Product < Rhoconnect::Model::Base
 
   def initialize(source)
     @base = 'http://rhostore.herokuapp.com/products'

@@ -1,9 +1,9 @@
 require 'rubygems'
 
 # Set environment to test
-ENV['RHO_ENV'] = 'test'
+ENV['RACK_ENV'] = 'test'
 ROOT_PATH = File.expand_path(File.join(File.dirname(__FILE__),'..'))
-Bundler.require(:default, ENV['RHO_ENV'].to_sym)
+Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 
 # Try to load vendor-ed rhoconnect, otherwise load the gem
 begin
@@ -12,31 +12,23 @@ rescue LoadError
   require 'rhoconnect'
 end
 
-$:.unshift File.join(File.dirname(__FILE__), "..") # FIXME:
-# Load our rhoconnect application
-require 'application'
+$:.unshift File.join(File.dirname(__FILE__), "..")
 include Rhoconnect
-
+require 'rhoconnect/application/init'
 require 'rhoconnect/test_methods'
 
-# Monkey patch to fix the following issue:
-# /Library/Ruby/Gems/1.8/gems/rspec-core-2.5.1/lib/rspec/core/shared_example_group.rb:45:
-# in `ensure_shared_example_group_name_not_taken': Shared example group '...' already exists (ArgumentError)
-module RSpec
-  module Core
-    module SharedExampleGroup
-    private
-      def ensure_shared_example_group_name_not_taken(name)
-      end
-    end
-  end
-end
-
-shared_examples_for "SpecHelper" do
+shared_examples "SpecHelper" do
   include Rhoconnect::TestMethods
-  
+
   before(:each) do
-    Store.db.flushdb
-    Application.initializer(ROOT_PATH)
-  end  
+    Store.create
+    Store.flush_all
+    Rhoconnect.bootstrap(ROOT_PATH)
+
+    # setup server's test settings
+    Rhoconnect::Server.set :environment, :test
+    Rhoconnect::Server.set :run, false
+    Rhoconnect::Server.set :use_async_model, false
+    Rhoconnect::Server.set :secret, "secure!"
+  end
 end
